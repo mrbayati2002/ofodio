@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+	<title></title>
+</head>
+<body>
+	<h2>Congratulation :)</h2>
+	<h3>{{ movie_name }} uploaded seccessfully</h3>
+	<h4>click <a href="/player/{{ movie_name }}">here</a> to watch it.</h4>
+	<br>
+	<br>
+	<h3><a href="{{ url_for('home') }}">Home</a></h3>
+</body>
+</html>

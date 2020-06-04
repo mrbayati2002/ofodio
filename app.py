@@ -44,7 +44,7 @@ def newMovie():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return redirect(url_for('uploaded_file', filename=filename))
-            return render_template('player.html', movie_name = filename)
+            return render_template('seccessful.html', movie_name = filename)
     return render_template('new_movie.html')
 
 
