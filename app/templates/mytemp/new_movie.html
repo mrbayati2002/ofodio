@@ -6,8 +6,14 @@
 </head>
 <body>
 	<form method=post enctype=multipart/form-data>
-    	<input type=file name=file>
-    	<input type=submit value=Upload>
+	<input type=text name=Mname> </br>
+	<input type=text name=Mdirector> </br>
+	<input type=date name=Mpubdate> </br>
+	<input type=text name=Mcountry> </br>
+	<input type=text name=Mlanguage> </br>
+	<input type=number name=Mlength> </br>
+	<input type=file name=file> </br>
+	<input type=submit value=Upload> </br>
 	</form>
 	{% for message in get_flashed_messages() %}
         <h2 style="color: red">{{ message }}</h2>
