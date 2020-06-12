@@ -22,13 +22,24 @@ app.config['UPLOAD_FOLDER'] = config.UPLOAD_FOLDER
 def home():
     return render_template('home.html')
 
+@app.route('/search')
+def search():
+    return render_template('search.html')
+
+@app.route('/full_list')
+def full_list():
+    return render_template('full_list.html')
+
+@app.route('/about')
+def about():
+    return render_template('/about.html')
 
 def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/newmovie', methods=['POST', 'GET'])
-def newMovie():
+def newmovie():
     if request.method == 'POST':
         # check if the post request has the file part
         if 'file' not in request.files:
@@ -45,7 +56,7 @@ def newMovie():
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             # return redirect(url_for('uploaded_file', filename=filename))
             return render_template('seccessful.html', movie_name = filename)
-    return render_template('new_movie.html')
+    return render_template('newmovie.html')
 
 
 if __name__ == '__main__':

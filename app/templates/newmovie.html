@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
+
+  <title>Ofodio Video Store and Player</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/heroic-features.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <img src="{{ url_for('static', filename='ofodio_video.png') }}" style="width:40px">
+      <a class="navbar-brand" href="#">Ofodio</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/serach">Search</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/full_list">Full list</a>
+          </li>
+          <li class="nav-item active">
+            <a class="nav-link" href="/newmovie">New movie</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+
+    <!-- Jumbotron Header -->
+    <header class="jumbotron my-4">
+      <form>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Movie Name</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Pub Date</span>
+          </div>
+          <input type="month" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Director</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Country</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Language</span>
+          </div>
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Length</span>
+          </div>
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" min="1" max="500">
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <label class="input-group-text" for="inputGroupSelect01">Genre</label>
+          </div>
+          <select class="custom-select" id="inputGroupSelect01">
+            <option selected>Choose...</option>
+            <option value="action">Action</option>
+            <option value="historical">Historical</option>
+            <option value="horro">Horror</option>
+            <option value="crime">Crime</option>
+            <option value="war">War</option>
+            <option value="family">Family</option>
+            <option value="news">News</option>
+            <option value="drama">Drama</option>
+            <option value="mysterious">Mysterious</option>
+            <option value="biography">Biography</option>
+            <option value="science_fiction">Science-Fiction</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="comedy">Comedy</option>
+            <option value="short">Short</option>
+            <option value="adventure">Adventure</option>
+            <option value="documentary">Documentary</option>
+            <option value="musical">Musical</option>
+            <option value="thriller">Thriller</option>
+            <option value="sport">Sport</option>
+            <option value="western">Western</option>
+          </select>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="inputGroup-sizing-default">Rank</span>
+          </div>
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Summary</span>
+          </div>
+          <textarea class="form-control" aria-label="With textarea"></textarea>
+        </div> </br>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Cover</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+          </div>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text">Movie File</span>
+          </div>
+          <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01">
+            <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+          </div>
+        </div>
+      </form>
+                  </br>
+      <div class="text-center">
+            <button type="button" class="btn btn-primary btn-lg">Save</button>
+      </div>
+    </header>
+
+    <!-- Page Features -->
+    <div class="row text-center">
+    </div>
+    <!-- /.row -->
+
+ </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+</body>
+
+</html>
