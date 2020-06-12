@@ -127,7 +127,10 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">{{ data.copyrightmessage }}</p>
+      <a href="https://github.com/mrbayati2002/ofodio">
+         <img alt="github" src="{{ url_for('static', filename='github.png') }}">
+      </a>
     </div>
     <!-- /.container -->
   </footer>

@@ -9,7 +9,7 @@
   <meta name="author" content="">
   <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.png') }}">
 
-  <title>Ofodio Video Store and Player</title>
+  <title>Ofodio | New Movie</title>
 
   <!-- Bootstrap core CSS -->
   <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -58,48 +58,52 @@
 
     <!-- Jumbotron Header -->
     <header class="jumbotron my-4">
-      <form>
+      <h2><div class="text-center"><span class="badge badge-secondary">New Movie</span></div></h2>
+      <!-- Toast message -->
+      {% include 'alert.html' %}
+      <!-- /Toast mesage -->
+      <form method="post" enctype=multipart/form-data name="movie_details" onsubmit="return validateForm()" required>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Movie Name</span>
           </div>
-          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="m_name">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Pub Date</span>
           </div>
-          <input type="month" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <input type="month" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="m_pubdate">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Director</span>
           </div>
-          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="m_director">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Country</span>
           </div>
-          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="m_country">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Language</span>
           </div>
-          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="m_language">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Length</span>
           </div>
-          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" min="1" max="500">
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" min="1" max="500"  name="m_length">
         </div>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <label class="input-group-text" for="inputGroupSelect01">Genre</label>
           </div>
-          <select class="custom-select" id="inputGroupSelect01">
+          <select class="custom-select" id="inputGroupSelect01" name="m_genre">
             <option selected>Choose...</option>
             <option value="action">Action</option>
             <option value="historical">Historical</option>
@@ -127,20 +131,20 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">Rank</span>
           </div>
-          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+          <input type="number" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default" name="m_rank">
         </div>
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text">Summary</span>
           </div>
-          <textarea class="form-control" aria-label="With textarea"></textarea>
+          <textarea class="form-control" aria-label="With textarea" name="m_summary"></textarea>
         </div> </br>
         <div class="input-group mb-3">
           <div class="input-group-prepend">
             <span class="input-group-text">Cover</span>
           </div>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" name="m_cover">
             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
           </div>
         </div>
@@ -149,15 +153,15 @@
             <span class="input-group-text">Movie File</span>
           </div>
           <div class="custom-file">
-            <input type="file" class="custom-file-input" id="inputGroupFile01">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" name="m_file">
             <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
           </div>
         </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary btn-lg" value="Upload">Save</button>
+        </div>
       </form>
-                  </br>
-      <div class="text-center">
-            <button type="button" class="btn btn-primary btn-lg">Save</button>
-      </div>
+
     </header>
 
     <!-- Page Features -->
@@ -171,7 +175,10 @@
   <!-- Footer -->
   <footer class="py-5 bg-dark">
     <div class="container">
-      <p class="m-0 text-center text-white">Copyright &copy; Your Website 2019</p>
+      <p class="m-0 text-center text-white">{{ data.copyrightmessage }}</p>
+      <a href="https://github.com/mrbayati2002/ofodio">
+         <img alt="github" src="{{ url_for('static', filename='github.png') }}">
+      </a>
     </div>
     <!-- /.container -->
   </footer>
@@ -179,6 +186,7 @@
   <!-- Bootstrap core JavaScript -->
   <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
   <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='myjs.js') }}"></script>
 
 </body>
 
