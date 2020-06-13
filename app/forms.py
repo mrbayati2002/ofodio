@@ -47,7 +47,7 @@ class AddMovieForm(FlaskForm):
     rank = FloatField('Rank', validators=[Length(min=0, max=10)])
     summary = TextAreaField('Summary', validators=[Length(max=1000)])
     cover = FileField('Cover', validators=[regexp(r'^[^/\\]\.jpg$')])
-    moviefile = FileField('Movie File', validators=[DataRequired()])
     have_subtitle = BooleanField('Subtitle ?', validators=[DataRequired()])
     subtitle = FileField('Subtitle')
+    moviefile = FileField('Movie File', validators=[DataRequired()])
     submit = SubmitField('Add')

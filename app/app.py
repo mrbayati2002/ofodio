@@ -52,7 +52,7 @@ def allowed_file(filename):
 
 @app.route('/addmovie', methods=['POST', 'GET'])
 def addmovie():
-    form = AddMovieForm
+    form = AddMovieForm()
     active = {'home':'', 'search':'', 'full_list':'', 'addmovie':'active', 'about':'',}
     return render_template('addmovie.html', form=form, data={'active':active,
                                                 'copyrightmessage':config.COPYRIGHT_MESSAGE,})
