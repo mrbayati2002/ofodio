@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.png') }}">
+  {% if data.title %}
+    <title>{{ data.title }}</title>
+  {% else %}
+    <title>Ofodio</title>
+  {% endif %}
+
+  <!-- Bootstrap core CSS -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="{{ url_for('static', filename='css/heroic-features.css') }}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <img src="{{ url_for('static', filename='img/ofodio_video.png') }}" style="width:40px">
+      <a class="navbar-brand" href="#">Ofodio</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link {{ data.active['home'] }}" href="/">Home
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item {{ data.active['seach'] }}">
+            <a class="nav-link" href="/serach">Search</a>
+          </li>
+          <li class="nav-item {{ data.active['full_list'] }}">
+            <a class="nav-link" href="/full_list">Full list</a>
+          </li>
+          <li class="nav-item {{ data.active['newmovie'] }}">
+            <a class="nav-link" href="/newmovie">New movie</a>
+          </li>
+          <li class="nav-item {{ data.active['about'] }}">
+            <a class="nav-link" href="/about">About</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container">
+    {% block content %}
+
+    {% endblock content %}
+    <!-- Page Features -->
+    <div class="row text-center">
+    </div>
+    <!-- /.row -->
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">{{ data.copyrightmessage }}</p>
+      <a href="https://github.com/mrbayati2002/ofodio">
+         <img alt="github" src="{{ url_for('static', filename='img/github.png') }}">
+      </a>
+    </div>
+    <!-- /.container -->
+  </footer>
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+
+</body>
+
+</html>

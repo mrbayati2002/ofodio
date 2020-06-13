@@ -17,22 +17,38 @@ app.config.update(SECRET_KEY=config.SECRET_KEY)
 
 app.config['UPLOAD_FOLDER'] = config.UPLOAD_FOLDER
 
-
 @app.route('/')
+@app.route('/home')
 def home():
-    return render_template('home.html', data={'copyrightmessage':config.COPYRIGHT_MESSAGE,})
+    active = {'home':'active', 'search':'', 'full_list':'', 'newmovie':'', 'about':'',}
+    return render_template('home.html', data= {'active': active,
+                                                    'copyrightmessage': config.COPYRIGHT_MESSAGE,
+                                                    'title':'Ofodio(Video platform) | Home',
+                                                    })
 
 @app.route('/search')
 def search():
-    return render_template('search.html', data={'copyrightmessage':config.COPYRIGHT_MESSAGE,})
+    active = {'home':'active', 'search':'active', 'full_list':'', 'newmovie':'', 'about':'',}
+    return render_template('search.html', data= {'active': active,
+                                                    'copyrightmessage': config.COPYRIGHT_MESSAGE,
+                                                    'title':'Ofodio | Search',
+                                                    })
 
 @app.route('/full_list')
 def full_list():
-    return render_template('full_list.html', data={'copyrightmessage':config.COPYRIGHT_MESSAGE,})
+    active = {'home':'active', 'search':'', 'full_list':'active', 'newmovie':'', 'about':'',}
+    return render_template('full_list.html', data= {'active': active,
+                                                    'copyrightmessage': config.COPYRIGHT_MESSAGE,
+                                                    'title':'Ofodio | Movies complete list',
+                                                    })
 
 @app.route('/about')
 def about():
-    return render_template('/about.html', data={'copyrightmessage':config.COPYRIGHT_MESSAGE,})
+    active = {'home':'', 'search':'', 'full_list':'', 'newmovie':'', 'about':'active',}
+    return render_template('/about.html', data= {'active': active,
+                                                    'copyrightmessage': config.COPYRIGHT_MESSAGE,
+                                                    'title':'About',
+                                                    })
 
 def allowed_file(filename):
     return '.' in filename and \
@@ -64,7 +80,9 @@ def newmovie():
             # return render_template('seccessful.html', movie_name = filename)
             flash('Seccussfully created :)', 'success')
             return redirect('/newmovie')
-    return render_template('newmovie.html', data={'copyrightmessage':config.COPYRIGHT_MESSAGE,})
+    active = {'home':'', 'search':'', 'full_list':'', 'newmovie':'active', 'about':'',}
+    return render_template('newmovie.html', data={'active':active,
+                                                'copyrightmessage':config.COPYRIGHT_MESSAGE,})
 
 def database_connection():
     import sqlite3
@@ -72,6 +90,6 @@ def database_connection():
     c = con.cursor()
 
 if __name__ == '__main__':
-    # app.run(debug = True, port=5005, host='0.0.0.0')
-    app.run(debug = True, port=5005)
+    app.run(debug = True, port=5005, host='0.0.0.0')
+    # app.run(debug = True, port=5005)
 
