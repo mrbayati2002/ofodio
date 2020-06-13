@@ -1,0 +1,22 @@
+import os
+import datetime
+
+SECRET_KEY = 'put your secret key here'
+
+UPLOAD_FOLDER = os.getcwd() + '/files'
+ALLOWED_EXTENSIONS = {'mp4', 'mkv', 'avi', 'flv', 'mov', 'wmv', 'webm', }
+
+COPYRIGHT_MESSAGE = 'Copyright © Ofodio %s'%datetime.datetime.now().year
+
+DB_NAME = 'movies.db'
+
+FORM_ITEMS_TO_EMPTY_CHECK = {'m_name':'Movie Name',
+			'm_pubdate': 'Pub Date',
+			'm_director': 'Director',
+			'm_country': 'Country',
+			'm_language': 'Language',
+			'm_length': 'Length',
+			'm_genre': 'Genre',
+			'm_cover': 'Cover',
+			'm_file': 'Movie File',
+			}
