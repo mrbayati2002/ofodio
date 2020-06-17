@@ -5,17 +5,38 @@ from flask import (
     redirect,
     request,
 )
-from forms import AddMovieForm
+from datetime import datetime
 import config
-from werkzeug.utils import secure_filename
-import os
-
-ALLOWED_EXTENSIONS = config.ALLOWED_EXTENSIONS
+from flask_sqlalchemy import SQLAlchemy
+from forms import AddMovieForm
 
 app = Flask(__name__)
 app.config.update(SECRET_KEY=config.SECRET_KEY)
-
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
 app.config['UPLOAD_FOLDER'] = config.UPLOAD_FOLDER
+db = SQLAlchemy(app)
+
+
+class Movie(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    pubdate = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    director = db.Column(db.String(30), nullable=False)
+    country = db.Column(db.String(16), nullable=False)
+    language = db.Column(db.String(16), nullable=False)
+    length = db.Column(db.Integer, nullable=False)
+    category = db.Column(db.String(20), nullable=False)
+    rank = db.Column(db.Float, nullable=True)
+    summary = db.Column(db.Text, nullable=True)
+    cover = db.Column(db.String(70), nullable=False, default=config.DEFAULT_COVER)
+    have_subtitle = db.Column(db.Boolean, nullable=False)
+    subtitle = db.Column(db.String(70), nullable=True)
+    moviefile = db.Column(db.String(70), nullable=False)
+
+    def __repr__(self):
+        return f'{self.name}, {self.pubdate}'
+
+
 
 @app.route('/')
 @app.route('/home')
@@ -27,14 +48,14 @@ def home():
 
 @app.route('/search')
 def search():
-    active = {'home':'active', 'search':'active', 'full_list':'', 'addmovie':'', 'about':'',}
+    active = {'home':'', 'search':'active', 'full_list':'', 'addmovie':'', 'about':'',}
     return render_template('search.html', data= {'active': active,
                                                     'copyrightmessage': config.COPYRIGHT_MESSAGE,
                                                     'title':'Ofodio | Search', })
 
 @app.route('/full_list')
 def full_list():
-    active = {'home':'active', 'search':'', 'full_list':'active', 'addmovie':'', 'about':'',}
+    active = {'home':'', 'search':'', 'full_list':'active', 'addmovie':'', 'about':'',}
     return render_template('full_list.html', data= {'active': active,
                                                     'copyrightmessage': config.COPYRIGHT_MESSAGE,
                                                     'title':'Ofodio | Movies complete list', })
@@ -46,9 +67,6 @@ def about():
                                                     'copyrightmessage': config.COPYRIGHT_MESSAGE,
                                                     'title':'About', })
 
-def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 @app.route('/addmovie', methods=['POST', 'GET'])
 def addmovie():
@@ -57,12 +75,7 @@ def addmovie():
     return render_template('addmovie.html', form=form, data={'active':active,
                                                 'copyrightmessage':config.COPYRIGHT_MESSAGE,})
 
-# def database_connection():
-#     import sqlite3
-#     con = sqlite3.conenct('%s'%config.DB_NAME)
-#     c = con.cursor()
 
 if __name__ == '__main__':
     # app.run(debug = True, port=5005, host='0.0.0.0')
     app.run(debug = True, port=5005)
-
