@@ -20,3 +20,5 @@ FORM_ITEMS_TO_EMPTY_CHECK = {'m_name':'Movie Name',
 			'm_cover': 'Cover',
 			'm_file': 'Movie File',
 			}
+
+DEFAULT_COVER = '37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f.jpg'   # 'default.jpg'
