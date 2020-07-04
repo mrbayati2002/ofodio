@@ -4,6 +4,7 @@ from flask import (
     flash,
     redirect,
     request,
+    url_for,
 )
 from datetime import datetime
 import config
@@ -71,6 +72,14 @@ def about():
 @app.route('/addmovie', methods=['POST', 'GET'])
 def addmovie():
     form = AddMovieForm()
+    if request.method=='POST':
+        if form.validate_on_submit():
+            print('#############################')
+            print('#############################')
+            return redirect(url_for('home'))
+        else:
+            print(form.name.data)
+            flash('Error','danger')
     active = {'home':'', 'search':'', 'full_list':'', 'addmovie':'active', 'about':'',}
     return render_template('addmovie.html', form=form, data={'active':active,
                                                 'copyrightmessage':config.COPYRIGHT_MESSAGE,})

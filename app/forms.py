@@ -1,4 +1,5 @@
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileRequired, FileAllowed
 from wtforms import (StringField,
                         SubmitField,
                         DateField,
@@ -7,11 +8,10 @@ from wtforms import (StringField,
                         TextAreaField,
                         FileField,
                         SelectField,
-                        BooleanField,
-                        SubmitField,
                         RadioField,
                         )
 from wtforms.validators import DataRequired, Length, regexp
+import config
 
 GENRES = (
     ('none', 'بدون دسته بندی'),
@@ -39,17 +39,19 @@ GENRES = (
 
 
 class AddMovieForm(FlaskForm):
+    moviefile_validators = [FileRequired(),
+                            FileAllowed(config.ALLOWED_EXTENSIONS, message='Choose a movie file!'),]
     name = StringField('Name', validators=[DataRequired(), Length(min=1, max=100)])
     pubdate = DateField('Publish Date', validators=[DataRequired()])
     director = StringField('Director', validators=[DataRequired(), Length(min=0, max=30)])
     country = StringField('Country', validators=[DataRequired(), Length(min=0, max=16)])
     language = StringField('Language', validators=[DataRequired(), Length(min=2, max=16)])
-    length = IntegerField('Length', validators=[DataRequired(), Length(min=0, max=500)])
+    length = IntegerField('Length', validators=[DataRequired(),])
     category = SelectField('Category', choices=GENRES, validators=[DataRequired()])
-    rank = FloatField('Rank', validators=[Length(min=0, max=10)])
+    rank = FloatField('Rank', validators=[])
     summary = TextAreaField('Summary', validators=[Length(max=1000)])
     cover = FileField('Cover', validators=[regexp(r'^[^/\\]\.jpg$')])
     have_subtitle = RadioField('Subtitle ?', choices=['yes','no'], validators=[DataRequired()])
-    subtitle = FileField('Subtitle File')
+    subtitle = FileField('Subtitle File', validators=[])
     moviefile = FileField('Movie File', validators=[DataRequired()])
     submit = SubmitField('Add')
